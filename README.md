@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">Groundwork</h1>
+  <h1 align="center">🔭 Groundwork</h1>
   <p align="center">
     Research the problem space before you build.<br>
     A landscape scan skill for <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a>.
@@ -17,9 +17,9 @@
 
 ---
 
-**Tired of building something that already exists?** Groundwork runs 4 parallel research agents to scan the landscape — who has this problem, how they work around it, and what solutions exist — so you can make informed decisions before writing a single line of code.
+**Don't build blind.** Groundwork runs 4 parallel research agents to scan the landscape — who has this problem, how they work around it, and what solutions exist — so you can make informed decisions before writing a single line of code.
 
-## Quick Start
+## ⚡ Quick Start
 
 ```bash
 # Install
@@ -29,7 +29,7 @@ mkdir -p ~/.claude/skills/groundwork && curl -sL https://raw.githubusercontent.c
 /groundwork auto SFX placement for game ad videos in After Effects
 ```
 
-## What It Does
+## 📦 What It Does
 
 Give it a pain point. Get back 3 structured research files in ~2 minutes:
 
@@ -40,7 +40,14 @@ Give it a pain point. Get back 3 structured research files in ~2 minutes:
 └── solutions.md   # Solution list, categories, frequency ranking, gaps, key insight
 ```
 
-## How It Works
+- **4 parallel research agents** — Context, Solutions, Behavior, JTBD run simultaneously (~2-3 min)
+- **Gap analysis** — Finds what no existing tool covers
+- **Contradiction detection** — Catches "marketed as X" vs "users say Y" discrepancies
+- **Duplicate check** — Won't overwrite existing research without asking
+- **Facts only** — No build/kill recommendations. You decide.
+- **English search, localized output** — Searches in English for broad coverage, saves in Korean (configurable)
+
+## ⚙️ How It Works
 
 ```mermaid
 flowchart TB
@@ -71,10 +78,23 @@ flowchart TB
     Save --> Summary["📋 Summary to user"]
 ```
 
-## Example Output
+## 🔍 Research Agents
+
+Each agent has a distinct search strategy and source set:
+
+| Agent | Role | Sources | Strategy | Limit |
+|-------|------|---------|----------|-------|
+| **Context** | Workflow, workarounds, user voices | Reddit, HN, forums, Stack Overflow | Community-focused: finds direct quotes and real frustrations | 10 searches |
+| **Solutions** | Existing tools and products | GitHub, Product Hunt, G2, Capterra, AlternativeTo, "awesome-*" lists, "best X alternatives" articles | Keyword + curated lists merged (70% overlap in testing when separate) | 10 searches |
+| **Behavior** | What people *actually* use | Reddit, forums, Stack Overflow, HN | Searches "how do you handle..." and "what do you use for..." discussions — separates marketed claims from real usage | 10 searches |
+| **JTBD** | Alternative approaches | Cross-industry, cross-domain | Jobs-to-be-Done lens: finds non-obvious competitors solving the same job differently | 8 searches |
+
+All agents search in **English** regardless of input language, for maximum coverage. After all 4 complete, the orchestrator runs gap analysis inline: deduplicates solutions, cross-references workarounds, identifies structural gaps, and flags contradictions.
+
+## 📋 Example Output
 
 Below is a real example from scanning "auto SFX placement for game ad videos".
-> **Note:** Default output is in Korean. Shown here in English for readability. Output language is [configurable](#customization).
+> **Note:** Default output is in Korean. Shown here in English for readability. Output language is [configurable](#-customization).
 
 <details>
 <summary><strong>triage.md</strong> — Problem definition</summary>
@@ -188,21 +208,7 @@ After research completes, you get a brief summary:
 - .omc/groundwork/sound-auto-placement/solutions.md
 ```
 
-## Features
-
-- **4 parallel research agents** — Context, Solutions, Behavior, JTBD run simultaneously (~2-3 min)
-- **Gap analysis** — Finds what no existing tool covers
-- **Contradiction detection** — Catches "marketed as X" vs "users say Y" discrepancies
-- **Duplicate check** — Won't overwrite existing research without asking
-- **Facts only** — No build/kill recommendations. You decide.
-- **English search, localized output** — Searches in English for broad coverage, saves in Korean (configurable)
-
-## Requirements
-
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI
-- [oh-my-claudecode](https://github.com/nicholasgriffintn/oh-my-claudecode) (for `document-specialist` agent routing)
-
-## Usage
+## 🚀 Usage
 
 ```bash
 # Korean input
@@ -217,7 +223,7 @@ After research completes, you get a brief summary:
   instruments and get translated professional music terminology prompts.
 ```
 
-## Customization
+## 🛠️ Customization
 
 <details>
 <summary><strong>Change output language</strong></summary>
@@ -254,7 +260,12 @@ Groundwork output is designed to feed into other skills:
 
 </details>
 
-## Design Decisions
+## 📌 Requirements
+
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI
+- [oh-my-claudecode](https://github.com/nicholasgriffintn/oh-my-claudecode) (for `document-specialist` agent routing)
+
+## 🧠 Design Decisions
 
 | Decision | Why |
 |----------|-----|
@@ -263,23 +274,10 @@ Groundwork output is designed to feed into other skills:
 | **English search** | Broader coverage than localized search. Output language is separate. |
 | **No depth modes** | Single mode. 4 agents is the sweet spot between speed and coverage. |
 
-## Research Agents
-
-Each agent has a distinct search strategy and source set:
-
-| Agent | Role | Sources | Strategy | Limit |
-|-------|------|---------|----------|-------|
-| **Context** | Workflow, workarounds, user voices | Reddit, HN, forums, Stack Overflow | Community-focused: finds direct quotes and real frustrations | 10 searches |
-| **Solutions** | Existing tools and products | GitHub, Product Hunt, G2, Capterra, AlternativeTo, "awesome-*" lists, "best X alternatives" articles | Keyword + curated lists merged (70% overlap in testing when separate) | 10 searches |
-| **Behavior** | What people *actually* use | Reddit, forums, Stack Overflow, HN | Searches "how do you handle..." and "what do you use for..." discussions — separates marketed claims from real usage | 10 searches |
-| **JTBD** | Alternative approaches | Cross-industry, cross-domain | Jobs-to-be-Done lens: finds non-obvious competitors solving the same job differently | 8 searches |
-
-All agents search in **English** regardless of input language, for maximum coverage. After all 4 complete, the orchestrator runs gap analysis inline: deduplicates solutions, cross-references workarounds, identifies structural gaps, and flags contradictions.
-
-## Contributing
+## 🤝 Contributing
 
 Issues and PRs welcome. This is a single-file skill (`SKILL.md`) — keep changes focused.
 
-## License
+## 📄 License
 
 [MIT](LICENSE)
