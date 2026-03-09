@@ -45,7 +45,7 @@ Give it a pain point. Get back 3 structured research files in ~2 minutes:
 - **Contradiction detection** — Catches "marketed as X" vs "users say Y" discrepancies
 - **Duplicate check** — Won't overwrite existing research without asking
 - **Facts only** — No build/kill recommendations. You decide.
-- **English search, localized output** — Searches in English for broad coverage, saves in Korean (configurable)
+- **English search, localized output** — Searches in English for broad coverage, saves in Korean ([configurable](#customization))
 
 ## How It Works
 
@@ -73,7 +73,7 @@ flowchart TB
         D["🔀 JTBD<br/>alternative<br/>approaches"]
     end
 
-    Explore --> Gap["🧩 Gap Analysis\ndedup + contradiction check"]
+    Explore --> Gap["🧩 Gap Analysis<br/>dedup + contradiction check"]
     Gap --> Save["💾 Save 3 files (Korean)"]
     Save --> Summary["📋 Summary to user"]
 ```
