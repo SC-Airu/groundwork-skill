@@ -49,11 +49,11 @@ flowchart TB
 
     subgraph Triage["Step 0: 트리아지"]
         direction LR
-        Check{"기존 결과\n있음?"}
+        Check{"기존 결과<br/>있음?"}
         Parse["문제 / 대상 / 이유 파싱"]
-        Ask["최대 2개 질문\n(불명확 시)"]
+        Ask["최대 2개 질문<br/>(불명확 시)"]
         Check -->|No| Parse
-        Check -->|Yes| Confirm["덮어쓸지\n확인"]
+        Check -->|Yes| Confirm["덮어쓸지<br/>확인"]
         Parse --> Ask
     end
 
@@ -61,10 +61,10 @@ flowchart TB
 
     subgraph Explore["Step 1: 탐색 (병렬)"]
         direction LR
-        A["🔍 컨텍스트\n워크플로, 우회 방법\n사용자 목소리"]
-        B["📦 솔루션\n키워드 + 큐레이션\n리스트 통합"]
-        C["👥 행동 패턴\n사람들이 실제로\n쓰는 것"]
-        D["🔀 JTBD\n다른 도메인의\n대안적 접근"]
+        A["🔍 컨텍스트<br/>워크플로, 우회 방법<br/>사용자 목소리"]
+        B["📦 솔루션<br/>키워드 + 큐레이션<br/>리스트 통합"]
+        C["👥 행동 패턴<br/>사람들이 실제로<br/>쓰는 것"]
+        D["🔀 JTBD<br/>다른 도메인의<br/>대안적 접근"]
     end
 
     Explore --> Gap["🧩 갭 분석\n중복 제거 + 모순 체크"]

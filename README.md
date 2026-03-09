@@ -49,11 +49,11 @@ flowchart TB
 
     subgraph Triage["Step 0: Triage"]
         direction LR
-        Check{"Existing\nresults?"}
+        Check{"Existing<br/>results?"}
         Parse["Parse What / Who / Why"]
-        Ask["Ask max 2 questions\n(if unclear)"]
+        Ask["Ask max 2 questions<br/>(if unclear)"]
         Check -->|No| Parse
-        Check -->|Yes| Confirm["Ask: overwrite\nor keep?"]
+        Check -->|Yes| Confirm["Ask: overwrite<br/>or keep?"]
         Parse --> Ask
     end
 
@@ -61,10 +61,10 @@ flowchart TB
 
     subgraph Explore["Step 1: Explore (parallel)"]
         direction LR
-        A["🔍 Context\nworkflow, workarounds\nuser voices"]
-        B["📦 Solutions\nkeyword + curated\nlists merged"]
-        C["👥 Behavior\nwhat people\nactually use"]
-        D["🔀 JTBD\nalternative\napproaches"]
+        A["🔍 Context<br/>workflow, workarounds<br/>user voices"]
+        B["📦 Solutions<br/>keyword + curated<br/>lists merged"]
+        C["👥 Behavior<br/>what people<br/>actually use"]
+        D["🔀 JTBD<br/>alternative<br/>approaches"]
     end
 
     Explore --> Gap["🧩 Gap Analysis\ndedup + contradiction check"]
