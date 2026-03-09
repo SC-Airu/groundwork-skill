@@ -28,7 +28,7 @@
 mkdir -p ~/.claude/skills/groundwork && curl -sL https://raw.githubusercontent.com/SC-Airu/groundwork-skill/main/SKILL.md -o ~/.claude/skills/groundwork/SKILL.md
 
 # Use in Claude Code
-/groundwork auto SFX placement for game ad videos in After Effects
+/groundwork AI ad creative analysis for mobile games
 ```
 
 ## What It Does
@@ -95,7 +95,7 @@ All agents search in **English** regardless of input language, for maximum cover
 
 ## Example Output
 
-Below is a real example from scanning "auto SFX placement for game ad videos".
+Below is a real example from scanning "AI ad creative analysis for mobile games".
 > **Note:** Default output is in Korean. Shown here in English for readability. Output language is [configurable](#customization).
 
 <details>
@@ -103,11 +103,11 @@ Below is a real example from scanning "auto SFX placement for game ad videos".
 
 ```markdown
 # Triage
-- Problem: Auto SFX placement tool for game ad videos.
-          AI analyzes video and auto-inserts pre-assigned sound effects per segment. After Effects.
-- Who: Game ad video producers (motion designers, creative producers)
-- Why: Title-specific sounds are nearly fixed but require manual timing adjustment every time.
-       Eliminating repetitive work.
+- Problem: AI-powered analysis of mobile game ad creatives (video/image)
+          to identify what drives performance
+- Who: UA/marketing teams, creative teams, executives/PMs
+- Why: Data-driven ad creative analysis is essential for efficient UA operations
+       and creative optimization
 ```
 
 </details>
@@ -116,30 +116,35 @@ Below is a real example from scanning "auto SFX placement for game ad videos".
 <summary><strong>context.md</strong> — Workflow & user voices</summary>
 
 ```markdown
-# Context: Auto SFX Placement
+# Context: AI Ad Analyst
 
 ## Current Workflow
-Occurs in game studio UA ad video production pipeline:
-1. Creative team receives ad brief (15-30 sec video)
-2. Motion designer assembles gameplay footage/animation in After Effects
-3. Manually places SFX from title-specific fixed SFX library onto timeline
-4. A/B test variations repeat — SFX must be re-placed each time
+Bottleneck recurs across these UA workflows:
+1. Post-campaign review — aggregate data from Meta/AppLovin/Google/TikTok via MMP
+2. Creative fatigue detection — creative lifespan 5-10 days on high-spend channels
+3. Creative briefing — derive new concepts from past performance (relies on memory)
+4. A/B testing — platform algorithms cause uneven exposure within ad sets
 
 ## Who Is Affected
 | Role | Responsibility | Skill Level |
 |------|---------------|-------------|
-| Motion Designer | Assembles ad video + places SFX directly in AE | AE mid-advanced, non-expert in audio |
-| Video Editor | Editing + basic sound design combined | Generalist, high-volume processing |
+| UA Manager | Campaign budgets, ROAS targets | Mid-advanced (data analysis required) |
+| Creative Strategist | Translate performance data → creative briefs | Hybrid (data + creative) |
+| Creative/Art Team | Mass asset production (46.2M assets in 2024) | Design/video expert, weak on data |
+| Executives/PM | Creative ROI reporting, budget approval | Summary data consumer |
 
 ## Current Workarounds
-1. Manual timeline scrubbing — numpad * key for markers → manual SFX placement
-2. MonkeySauce — marker→SFX assignment automation (but markers are still manual)
-3. Template-based pre-rigging — AE project templates with pre-positioned SFX
+1. Manual naming conventions + spreadsheets — ~20 hrs/week per team
+2. Cross-platform manual switching between Meta/AppLovin/TikTok/MMP dashboards
+3. Competitor spy tools — long-running creatives assumed profitable
+4. Volume strategy — produce 20-40 new creatives/month, let algorithm find winners
 
 ## User Voices
-> "Sound is often left until the end of the process when sound is actually
->  responsible for half OR MORE of the emotional impact of work."
-> — School of Motion
+> "Performance data is abundant, but actionable creative insight is scarce."
+> — Segwise, 2026
+
+> "Managing naming conventions was heinous."
+> — Foxwell Digital
 ```
 
 </details>
@@ -148,42 +153,50 @@ Occurs in game studio UA ad video production pipeline:
 <summary><strong>solutions.md</strong> — Solution landscape (key sections)</summary>
 
 ```markdown
-# Solution Landscape: Auto SFX Placement
+# Solution Landscape: AI Ad Analyst
 
 ## Solution List
 | Name | Approach | Strengths | Weaknesses |
 |------|----------|-----------|------------|
-| MonkeySauce | AE script: marker-based SFX trigger | AE native, custom SFX supported | Markers are manual, no video analysis |
-| ElevenLabs V2S | AI: GPT-4o vision → SFX generation | API available | No custom library support |
-| MMAudio | Open source: video→audio synthesis | Free, runs locally | Generates ambient, not individual SFX |
-| CapCut Auto | Consumer editor: AI SFX auto-placement | Free, fast | Consumer-grade, no custom SFX |
-| ... | (24 solutions total) | | |
+| Segwise | Multimodal AI tagging → IPM/CTR/ROAS | Mobile game native, playable ads | Newer entrant |
+| AppsFlyer Creative Opt. | AI scene decomposition + MMP attribution | Direct attribution link | Requires AppsFlyer as MMP |
+| VidMob | AI + human expert scoring, cross-channel | Industry incumbent, 300+ brands | Enterprise-only, expensive |
+| Replai | Computer vision, frame-by-frame video tagging | $5B+ ad spend processed | Video-only, no playable ads |
+| SensorTower | Competitor creative gallery, 14+ networks | Market leader | $25K+/yr, no own-creative AI |
+| Motion | Visual-first creative analytics | Intuitive UI, $299-599/mo | Not game-specific |
+| ... | (22 solutions total, 6 categories) | | |
 
 ## Categories
-1. AE Native Tools (manual/semi-auto) — MonkeySauce, Boombox, SoundBox ...
-2. AI SFX Generation (new sound synthesis) — ElevenLabs, MMAudio, FoleyCrafter ...
-3. Consumer Auto SFX Editors — CapCut, Submagic, FlexClip ...
-4. Game Engine Direct Capture — Unreal Take Recorder, UE4Capture
+1. AI Creative Analysis (own creatives) — Segwise, AppsFlyer, VidMob, Replai ...
+2. Competitor Intelligence (ad spy) — SensorTower, MobileAction, AppMagic ...
+3. AI Creative Generation — Pencil, AdCreative.ai, Predis.ai
+4. Automated Multivariate Testing — Marpipe, Smartly.io
+5. Pre-Launch Consumer Testing — System1, Kantar, Behavio
+6. Neuroscience/Attention — Realeyes, Dragonfly AI
 
 ## Key Gap
-No tool solves the 3-layer problem:
-| Layer | Required | Existing Tools |
-|-------|----------|---------------|
-| 1. Event Detection | AI detects game events | ElevenLabs (partial) |
-| 2. SFX Mapping | Event → custom SFX selection | MonkeySauce (manual) |
-| 3. AE Placement | Place at exact frame | MonkeySauce, ExtendScript |
+No tool solves the full pipeline:
+| Gap | Description |
+|-----|-------------|
+| Element → Retention/LTV | No tool connects creative attributes to D1/D7/D30 retention |
+| Playable Ad Analysis | Only Segwise attempts AI analysis of interactive ads |
+| Integrated Workflow | Competitor intel + own analysis + briefing requires 3-5 separate tools |
+| Game-specific + Affordable | Game-native tools are enterprise-priced; affordable tools are e-commerce focused |
 
 ## Contradictions
 | Contradiction | Marketing | Reality |
 |--------------|-----------|---------|
-| AI SFX tool viability | "Many exist" | No game ad pros actually use them |
-| MonkeySauce sufficiency | "24 recipes for automation" | Only solves assignment, not detection |
+| AI creative analysis adoption | "Many tools available" | Most teams still use spreadsheets + naming conventions |
+| VidMob accessibility | Most-cited incumbent | Enterprise-only, inaccessible to small/mid studios |
+| Volume strategy efficiency | "Produce more to find winners" | 2% of creatives get 68% of spend — 98% structural waste |
 
 ## Key Insight
-The problem exists not because there are no tools, but because each tool
-only solves a different layer. AI vision can detect events, AE scripting
-can place SFX. But no integration layer connects them while mapping
-to custom SFX libraries.
+The market is in a "data-rich, insight-poor" structural paradox.
+Most UA teams still rely on manual tagging + spreadsheets. AI creative
+intelligence tools (Segwise, Replai, Reforged Labs) are emerging but
+in early adoption. The biggest unsolved problems: creative element →
+downstream metrics (retention/LTV), playable ad analysis, and an
+integrated workflow from analysis → briefing → production.
 ```
 
 </details>
@@ -193,21 +206,21 @@ to custom SFX libraries.
 After research completes, you get a brief summary:
 
 ```
-## Groundwork Complete: sound-auto-placement
+## Groundwork Complete: ai-ad-analyst
 
 ### Context
-- Game ad motion designers manually place title-specific SFX on every video
-- Main workaround: MonkeySauce (marker→SFX automation, but markers are manual)
+- UA teams have abundant performance data but lack element-level "why" insights
+- Main workaround: manual naming conventions + spreadsheets (~20 hrs/week)
 
 ### Solution Landscape
-- 24 solutions across 7 categories
-- Key insight: No tool solves the 3-layer problem (detection/mapping/placement)
-- Key gap: Many AI SFX tools exist but none support custom SFX libraries
+- 22 solutions across 6 categories
+- Key insight: "Data-rich, insight-poor" paradox — AI tools emerging but not yet mainstream
+- Key gap: No tool connects creative elements → retention/LTV or analyzes playable ads
 
 ### Files
-- .omc/groundwork/sound-auto-placement/triage.md
-- .omc/groundwork/sound-auto-placement/context.md
-- .omc/groundwork/sound-auto-placement/solutions.md
+- .omc/groundwork/ai-ad-analyst/triage.md
+- .omc/groundwork/ai-ad-analyst/context.md
+- .omc/groundwork/ai-ad-analyst/solutions.md
 ```
 
 ## Usage
