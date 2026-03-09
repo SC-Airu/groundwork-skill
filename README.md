@@ -206,18 +206,22 @@ integrated workflow from analysis → briefing → production.
 After research completes, you get a brief summary:
 
 ```
-## Groundwork Complete: ai-ad-analyst
+## Groundwork 완료: ai-ad-analyst
 
-### Context
-- UA teams have abundant performance data but lack element-level "why" insights
-- Main workaround: manual naming conventions + spreadsheets (~20 hrs/week)
+### 컨텍스트
+- 모바일 게임 UA 팀은 광고 소재의 성과 데이터는 풍부하지만, "왜 잘됐는지" 요소 수준
+  인사이트가 부족해 수동 태깅+스프레드시트에 의존하는 구조적 병목 존재
+- 주요 워크어라운드: 네이밍 컨벤션 + 피벗 테이블 (팀당 주 ~20시간), 물량 전략(월 20~40개 소재)
 
-### Solution Landscape
-- 22 solutions across 6 categories
-- Key insight: "Data-rich, insight-poor" paradox — AI tools emerging but not yet mainstream
-- Key gap: No tool connects creative elements → retention/LTV or analyzes playable ads
+### 솔루션 현황
+- 22개 솔루션, 6개 카테고리 (AI 자사 분석 / 경쟁사 인텔리전스 / AI 생성 / 다변량 테스트
+  / 프리론칭 테스트 / 뉴로사이언스)
+- 핵심 인사이트: AI 크리에이티브 인텔리전스 도구(Segwise, Replai, Reforged Labs)가 부상
+  중이나 아직 초기 채택 단계. 대부분의 팀은 여전히 스프레드시트 기반
+- 핵심 공백: ①소재 요소→리텐션/LTV 연결 ②플레이어블 광고 AI 분석 ③경쟁사 인텔리전스
+  +자사 분석+브리핑을 잇는 통합 워크플로 ④중소 게임 스튜디오를 위한 게임 특화+합리적 가격 조합
 
-### Files
+### 파일
 - .omc/groundwork/ai-ad-analyst/triage.md
 - .omc/groundwork/ai-ad-analyst/context.md
 - .omc/groundwork/ai-ad-analyst/solutions.md
