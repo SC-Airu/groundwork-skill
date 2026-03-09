@@ -17,7 +17,9 @@
 
 ---
 
-**Don't build blind.** Groundwork runs 4 parallel research agents to scan the landscape — who has this problem, how they work around it, and what solutions exist — so you can make informed decisions before writing a single line of code. **Give your AI real-world context and it gives you smarter answers.**
+**Don't build blind.** Groundwork runs 4 parallel research agents to scan the landscape — who has this problem, how they work around it, and what solutions exist — so you can make informed decisions before writing a single line of code.
+
+> *Give your AI real-world context and it gives you smarter answers.*
 
 ## Quick Start
 
