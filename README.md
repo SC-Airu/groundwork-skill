@@ -17,7 +17,7 @@
 
 ---
 
-**Don't build blind.** Groundwork runs 4 parallel research agents to scan the landscape — who has this problem, how they work around it, and what solutions exist — so you can make informed decisions before writing a single line of code.
+**Don't build blind.** Groundwork runs 4 parallel research agents to scan the landscape — who has this problem, how they work around it, and what solutions exist — so you can make informed decisions before writing a single line of code. Give your AI real-world context and it gives you smarter answers.
 
 ## Quick Start
 
@@ -94,7 +94,7 @@ All agents search in **English** regardless of input language, for maximum cover
 ## Example Output
 
 Below is a real example from scanning "auto SFX placement for game ad videos".
-> **Note:** Default output is in Korean. Shown here in English for readability. Output language is [configurable](#-customization).
+> **Note:** Default output is in Korean. Shown here in English for readability. Output language is [configurable](#customization).
 
 <details>
 <summary><strong>triage.md</strong> — Problem definition</summary>
