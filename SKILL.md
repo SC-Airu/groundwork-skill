@@ -38,6 +38,7 @@ Does NOT decide whether to build. Does NOT assess technical feasibility. Those a
 - Gap analysis done by orchestrator inline after agents complete (no separate agent).
 - Present a brief summary to the user at the end. Do NOT make build/kill recommendations.
 - If input is sufficiently detailed, skip triage questions.
+- **Agent fallback**: Use `subagent_type="oh-my-claudecode:document-specialist"` when oh-my-claudecode is available. If unavailable (agent type not recognized or errors), fall back to `subagent_type="general-purpose"` with the same prompt. The general-purpose agent has web search access and will produce comparable results.
 </Execution_Policy>
 
 <Steps>
@@ -275,7 +276,7 @@ Do NOT recommend build/kill/adopt. Just present the facts.
 
 <Tool_Usage>
 - `AskUserQuestion` — for triage questions only (max 2)
-- `Task(subagent_type="oh-my-claudecode:document-specialist", model="sonnet")` x 4 — web research (English)
+- `Agent(subagent_type="oh-my-claudecode:document-specialist")` x 4 — web research (English). Falls back to `Agent(subagent_type="general-purpose")` if OMC is unavailable.
 - `Write` — save outputs to `.omc/groundwork/{slug}/` (Korean)
 </Tool_Usage>
 

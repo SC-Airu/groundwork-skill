@@ -9,6 +9,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/Claude_Code-skill-blueviolet.svg" alt="Claude Code Skill"></a>
+  <a href="https://github.com/nicholasgriffintn/oh-my-claudecode"><img src="https://img.shields.io/badge/OMC-enhanced-ff69b4.svg" alt="OMC Enhanced"></a>
 </p>
 
 <p align="center">
@@ -282,7 +283,18 @@ Groundwork output is designed to feed into other skills:
 ## Requirements
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI
-- [oh-my-claudecode](https://github.com/nicholasgriffintn/oh-my-claudecode) (for `document-specialist` agent routing)
+- [oh-my-claudecode](https://github.com/nicholasgriffintn/oh-my-claudecode) — **optional but recommended**
+
+### With vs Without OMC
+
+| | With OMC | Without OMC |
+|---|---------|-------------|
+| **Agent** | `document-specialist` (research-optimized prompt) | `general-purpose` (automatic fallback) |
+| **Web search** | Yes | Yes |
+| **Research quality** | Higher — specialist prompt tuned for landscape scans | Good — same web search tools, no specialist framing |
+| **Speed** | ~2-3 min | ~2-3 min |
+
+Groundwork works without OMC by falling back to Claude Code's built-in `general-purpose` agent. Install OMC for better research quality via the `document-specialist` agent's optimized system prompt.
 
 ## Design Decisions
 
