@@ -28,7 +28,7 @@
 mkdir -p ~/.claude/skills/groundwork && curl -sL https://raw.githubusercontent.com/SC-Airu/groundwork-skill/main/SKILL.md -o ~/.claude/skills/groundwork/SKILL.md
 
 # Claude Code에서 사용
-/groundwork 게임 사운드 자동 배치 - AI가 영상 분석해 효과음 자동 삽입
+/groundwork 모바일 게임 광고 소재 AI 분석
 ```
 
 ## 하는 일
@@ -95,17 +95,16 @@ flowchart TB
 
 ## 출력 예시
 
-아래는 "게임 광고 사운드 자동 배치"를 스캔한 실제 결과입니다:
+아래는 "모바일 게임 광고 소재 AI 분석"을 스캔한 실제 결과입니다:
 
 <details>
 <summary><strong>triage.md</strong> — 문제 정의</summary>
 
 ```markdown
 # 트리아지
-- 문제: 게임 광고 영상에 사운드를 자동 배치하는 도구.
-       AI가 영상을 분석해 구간별로 미리 지정된 효과음을 자동 삽입. After Effects 기준.
-- 대상: 게임 광고 영상 제작자 (모션 디자이너, 크리에이티브 프로듀서)
-- 이유: 타이틀별 사운드가 거의 고정인데 매번 수동 타이밍 조절하는 리소스가 큼. 반복 작업 제거 목적.
+- 문제: AI로 모바일 게임 광고 소재(영상/이미지)를 분석하여 성과 요인을 파악하는 도구 필요
+- 대상: UA/마케팅 팀, 크리에이티브 팀, 경영진/PM
+- 이유: 광고 소재의 성과를 데이터 기반으로 분석해야 효율적인 UA 운영과 크리에이티브 최적화가 가능
 ```
 
 </details>
@@ -114,30 +113,35 @@ flowchart TB
 <summary><strong>context.md</strong> — 워크플로 & 사용자 목소리</summary>
 
 ```markdown
-# 컨텍스트: 사운드 자동 배치
+# 컨텍스트: AI Ad Analyst
 
 ## 워크플로 현황
-게임 스튜디오의 UA 광고 영상 제작 파이프라인에서 발생:
-1. 크리에이티브 팀이 광고 브리프 수령 (15~30초 영상)
-2. 모션 디자이너가 After Effects에서 게임플레이 푸티지/애니메이션 조립
-3. 타이틀별 고정 SFX 라이브러리에서 효과음을 수동으로 타임라인에 배치
-4. A/B 테스트용 변형 반복 — 매번 SFX 재배치 필요
+다음 UA 워크플로에서 반복적으로 발생하는 병목:
+1. 캠페인 사후 분석 — Meta/AppLovin/Google/TikTok 데이터를 MMP에서 취합
+2. 크리에이티브 피로도 감지 — 고지출 채널에서 소재 수명 5~10일
+3. 크리에이티브 브리핑 — 과거 성과 기반 신규 컨셉 도출 (기억에 의존)
+4. A/B 테스트 — 플랫폼 알고리즘이 같은 광고 세트 내 불균등 노출
 
 ## 영향 대상
 | 역할 | 책임 | 기술 수준 |
 |------|------|----------|
-| 모션 디자이너 | AE에서 광고 영상 조립 + SFX 배치 직접 수행 | AE 중~고급, 오디오는 비전문 |
-| 영상 에디터 | 편집 + 기본 사운드 디자인 겸임 | 제너럴리스트, 고볼륨 처리 |
+| UA 매니저 | 캠페인 예산 배분, ROAS 타겟 관리 | 중급~고급 (데이터 분석 필수) |
+| 크리에이티브 전략가 | 성과 데이터 → 크리에이티브 브리프 변환 | 하이브리드 (데이터 + 크리에이티브) |
+| 크리에이티브/아트 팀 | 소재 대량 제작 (2024년 기준 4,620만 소재) | 디자인/영상 전문, 데이터 분석 약함 |
+| 경영진/PM | 크리에이티브 ROI 보고, 예산 승인 | 요약 데이터 소비자 |
 
 ## 현재 우회 방법
-1. 수동 타임라인 스크러빙 — 넘패드 * 키로 마커 찍기 → SFX 수동 배치
-2. MonkeySauce — 마커→SFX 할당 자동화 (단, 마커 자체는 수동)
-3. 템플릿 기반 프리리깅 — SFX 미리 포지션된 AE 프로젝트 템플릿
+1. 수동 네이밍 컨벤션 + 스프레드시트 — 팀당 주 ~20시간 소요
+2. 플랫폼 간 수동 전환 — Meta/AppLovin/TikTok/MMP 대시보드 번갈아 확인
+3. 경쟁사 스파이 도구 — 장기 운영 소재 = 수익성 있다고 추론
+4. 물량 전략 — 월 20~40개 소재 제작, 알고리즘에 위너 발견 위임
 
 ## 사용자 목소리
-> "Sound is often left until the end of the process when sound is actually
->  responsible for half OR MORE of the emotional impact of work."
-> — School of Motion
+> "Performance data is abundant, but actionable creative insight is scarce."
+> — Segwise, 2026
+
+> "Managing naming conventions was heinous."
+> — Foxwell Digital
 ```
 
 </details>
@@ -146,41 +150,49 @@ flowchart TB
 <summary><strong>solutions.md</strong> — 솔루션 현황 (주요 섹션)</summary>
 
 ```markdown
-# 솔루션 현황: 사운드 자동 배치
+# 솔루션 현황: AI Ad Analyst
 
 ## 솔루션 목록
 | 이름 | 접근 방식 | 강점 | 약점 |
 |------|----------|------|------|
-| MonkeySauce | AE 스크립트: 마커 기반 SFX 트리거 | AE 네이티브, 커스텀 SFX 가능 | 마커는 수동, 영상 분석 없음 |
-| ElevenLabs V2S | AI: GPT-4o 비전 → SFX 생성 | API 사용 가능 | 커스텀 라이브러리 미지원 |
-| MMAudio | 오픈소스: 비디오→오디오 합성 | 무료, 로컬 실행 | 개별 SFX 아닌 앰비언트 생성 |
-| CapCut Auto | 소비자 에디터: AI SFX 자동 배치 | 무료, 빠름 | 소비자급, 커스텀 SFX 불가 |
-| ... | (총 24개 솔루션) | | |
+| Segwise | 멀티모달 AI 태깅 → IPM/CTR/ROAS 연결 | 모바일 게임 특화, 플레이어블 광고 지원 | 신생 업체 |
+| AppsFlyer Creative Opt. | AI 씬 분해 + MMP 어트리뷰션 연동 | 어트리뷰션 직접 연결 | AppsFlyer MMP 종속 |
+| VidMob | AI + 휴먼 전문가 스코어링, 크로스 채널 | 업계 인컴번트, 300+ 브랜드 | 엔터프라이즈 전용, 고비용 |
+| Replai | 컴퓨터 비전, 프레임별 영상 태깅 | $5B+ 광고비 처리 | 영상 전용, 플레이어블 미지원 |
+| SensorTower | 경쟁사 크리에이티브 갤러리, 14+ 네트워크 | 시장 리더 | $25K+/년, 자사 소재 AI 없음 |
+| Motion | 비주얼 중심 크리에이티브 분석 | UI 직관적, $299~599/월 | 게임 특화 아님 |
+| ... | (총 22개 솔루션, 6개 카테고리) | | |
 
 ## 카테고리 분류
-1. AE 네이티브 도구 (수동/반자동) — MonkeySauce, Boombox, SoundBox ...
-2. AI SFX 생성 (새 사운드 합성) — ElevenLabs, MMAudio, FoleyCrafter ...
-3. 소비자 자동 SFX 에디터 — CapCut, Submagic, FlexClip ...
-4. 게임 엔진 직접 캡처 — Unreal Take Recorder, UE4Capture
+1. AI 크리에이티브 분석 (자사 소재) — Segwise, AppsFlyer, VidMob, Replai ...
+2. 경쟁사 인텔리전스 (Ad Spy) — SensorTower, MobileAction, AppMagic ...
+3. AI 크리에이티브 생성 — Pencil, AdCreative.ai, Predis.ai
+4. 자동 다변량 테스트 — Marpipe, Smartly.io
+5. 프리론칭 소비자 테스트 — System1, Kantar, Behavio
+6. 뉴로사이언스/어텐션 — Realeyes, Dragonfly AI
 
 ## 핵심 공백
-3-레이어 문제를 해결하는 도구가 없음:
-| 레이어 | 필요 기능 | 현존 도구 |
-|--------|----------|----------|
-| 1. 이벤트 감지 | AI가 게임 이벤트 감지 | ElevenLabs (부분적) |
-| 2. SFX 매핑 | 이벤트→커스텀 SFX 선택 | MonkeySauce (수동) |
-| 3. AE 배치 | 정확한 프레임에 배치 | MonkeySauce, ExtendScript |
+전체 파이프라인을 해결하는 도구가 없음:
+| 공백 | 설명 |
+|------|------|
+| 소재 요소→리텐션/LTV | 크리에이티브 속성을 D1/D7/D30 리텐션과 연결하는 도구 부재 |
+| 플레이어블 광고 분석 | 인터랙티브 광고의 AI 분석은 Segwise만 시도 |
+| 통합 워크플로 | 경쟁사 인텔리전스 + 자사 분석 + 브리핑에 3~5개 도구 필요 |
+| 게임 특화 + 합리적 가격 | 게임 특화 도구는 엔터프라이즈 가격, 저가 도구는 e-commerce 중심 |
 
 ## 모순점
 | 모순 | 마케팅 | 실제 |
 |------|--------|------|
-| AI SFX 도구 실용성 | "다수 존재" | 게임 광고 프로는 아무도 안 씀 |
-| MonkeySauce 충분성 | "24개 레시피로 자동화" | 감지 아닌 할당만 해결 |
+| AI 크리에이티브 분석 도구 보급 | "다수 존재" | 대부분 팀은 여전히 스프레드시트 + 네이밍 컨벤션 |
+| VidMob 접근성 | 최다 인용 인컴번트 | 엔터프라이즈 전용, 중소 스튜디오 접근 불가 |
+| 물량 전략 효율성 | "더 많이 만들면 위너 발견" | 2% 소재가 68% 광고비 소비 — 98% 구조적 낭비 |
 
 ## 핵심 인사이트
-도구가 없어서가 아니라 도구들이 각각 다른 레이어만 해결하기 때문에 발생.
-AI 비전 기술은 이벤트를 감지할 수 있고, AE 스크립팅은 배치할 수 있다.
-그러나 이 둘을 연결하면서 커스텀 SFX 라이브러리를 매핑하는 통합 레이어가 없다.
+시장은 "데이터는 풍부하지만 인사이트는 부족한" 구조적 역설 상태.
+대부분의 UA 팀은 여전히 수동 태깅 + 스프레드시트에 의존. AI 크리에이티브
+인텔리전스 도구(Segwise, Replai, Reforged Labs)가 부상하고 있으나 초기 채택 단계.
+가장 큰 미해결 문제: 소재 요소→다운스트림 지표(리텐션/LTV) 연결,
+플레이어블 광고 분석, 분석→브리핑→제작 통합 워크플로.
 ```
 
 </details>
@@ -190,31 +202,31 @@ AI 비전 기술은 이벤트를 감지할 수 있고, AE 스크립팅은 배치
 리서치가 완료되면 간략한 요약이 표시됩니다:
 
 ```
-## Groundwork 완료: sound-auto-placement
+## Groundwork 완료: ai-ad-analyst
 
 ### 컨텍스트
-- 게임 광고 모션 디자이너가 타이틀별 고정 SFX를 매 영상마다 수동 배치
-- 주요 워크어라운드: MonkeySauce (마커→SFX 자동 할당, 단 마커는 수동)
+- UA 팀에 성과 데이터는 풍부하지만 "왜" 수준의 요소별 인사이트 부족
+- 주요 워크어라운드: 수동 네이밍 컨벤션 + 스프레드시트 (주 ~20시간)
 
 ### 솔루션 현황
-- 24개 솔루션, 7개 카테고리
-- 핵심 인사이트: 3-레이어 문제(감지/매핑/배치)를 해결하는 도구 없음
-- 핵심 공백: AI SFX 도구 다수 존재하나 커스텀 라이브러리 미지원이 치명적
+- 22개 솔루션, 6개 카테고리
+- 핵심 인사이트: "데이터 풍부, 인사이트 부족" 역설 — AI 도구 부상 중이나 아직 주류 아님
+- 핵심 공백: 소재 요소→리텐션/LTV 연결 도구 없음, 플레이어블 광고 분석 미개척
 
 ### 파일
-- .omc/groundwork/sound-auto-placement/triage.md
-- .omc/groundwork/sound-auto-placement/context.md
-- .omc/groundwork/sound-auto-placement/solutions.md
+- .omc/groundwork/ai-ad-analyst/triage.md
+- .omc/groundwork/ai-ad-analyst/context.md
+- .omc/groundwork/ai-ad-analyst/solutions.md
 ```
 
 ## 사용법
 
 ```bash
 # 한글 입력
-/groundwork 게임 사운드 자동 배치 - AI가 영상 분석해 효과음 자동 삽입
+/groundwork 모바일 게임 광고 소재 AI 분석
 
 # 영어 입력
-/groundwork auto SFX placement for game ad videos in After Effects
+/groundwork AI ad creative analysis for mobile games
 
 # 상세 입력 (트리아지 질문 스킵)
 /groundwork Music Prompt Builder - 클릭 몇 번으로 Suno AI용 BGM 프롬프트 생성.
