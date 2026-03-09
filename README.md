@@ -19,7 +19,7 @@
 
 **Don't build blind.** Groundwork runs 4 parallel research agents to scan the landscape — who has this problem, how they work around it, and what solutions exist — so you can make informed decisions before writing a single line of code.
 
-## ⚡ Quick Start
+## Quick Start
 
 ```bash
 # Install
@@ -29,7 +29,7 @@ mkdir -p ~/.claude/skills/groundwork && curl -sL https://raw.githubusercontent.c
 /groundwork auto SFX placement for game ad videos in After Effects
 ```
 
-## 📦 What It Does
+## What It Does
 
 Give it a pain point. Get back 3 structured research files in ~2 minutes:
 
@@ -47,7 +47,7 @@ Give it a pain point. Get back 3 structured research files in ~2 minutes:
 - **Facts only** — No build/kill recommendations. You decide.
 - **English search, localized output** — Searches in English for broad coverage, saves in Korean (configurable)
 
-## ⚙️ How It Works
+## How It Works
 
 ```mermaid
 flowchart TB
@@ -78,7 +78,7 @@ flowchart TB
     Save --> Summary["📋 Summary to user"]
 ```
 
-## 🔍 Research Agents
+## Research Agents
 
 Each agent has a distinct search strategy and source set:
 
@@ -91,7 +91,7 @@ Each agent has a distinct search strategy and source set:
 
 All agents search in **English** regardless of input language, for maximum coverage. After all 4 complete, the orchestrator runs gap analysis inline: deduplicates solutions, cross-references workarounds, identifies structural gaps, and flags contradictions.
 
-## 📋 Example Output
+## Example Output
 
 Below is a real example from scanning "auto SFX placement for game ad videos".
 > **Note:** Default output is in Korean. Shown here in English for readability. Output language is [configurable](#-customization).
@@ -208,7 +208,7 @@ After research completes, you get a brief summary:
 - .omc/groundwork/sound-auto-placement/solutions.md
 ```
 
-## 🚀 Usage
+## Usage
 
 ```bash
 # Korean input
@@ -223,7 +223,7 @@ After research completes, you get a brief summary:
   instruments and get translated professional music terminology prompts.
 ```
 
-## 🛠️ Customization
+## Customization
 
 <details>
 <summary><strong>Change output language</strong></summary>
@@ -260,12 +260,12 @@ Groundwork output is designed to feed into other skills:
 
 </details>
 
-## 📌 Requirements
+## Requirements
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI
 - [oh-my-claudecode](https://github.com/nicholasgriffintn/oh-my-claudecode) (for `document-specialist` agent routing)
 
-## 🧠 Design Decisions
+## Design Decisions
 
 | Decision | Why |
 |----------|-----|
@@ -274,10 +274,10 @@ Groundwork output is designed to feed into other skills:
 | **English search** | Broader coverage than localized search. Output language is separate. |
 | **No depth modes** | Single mode. 4 agents is the sweet spot between speed and coverage. |
 
-## 🤝 Contributing
+## Contributing
 
 Issues and PRs welcome. This is a single-file skill (`SKILL.md`) — keep changes focused.
 
-## 📄 License
+## License
 
 [MIT](LICENSE)
