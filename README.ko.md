@@ -41,7 +41,132 @@ mkdir -p ~/.claude/skills/groundwork && curl -sL https://raw.githubusercontent.c
 └── solutions.md   # 솔루션 목록, 카테고리, 빈도 순위, 공백, 핵심 인사이트
 ```
 
-### 출력 예시
+## 작동 방식
+
+```mermaid
+flowchart TB
+    Input["🎯 페인 포인트 입력"] --> Triage
+
+    subgraph Triage["Step 0: 트리아지"]
+        direction LR
+        Check{"기존 결과\n있음?"}
+        Parse["문제 / 대상 / 이유 파싱"]
+        Ask["최대 2개 질문\n(불명확 시)"]
+        Check -->|No| Parse
+        Check -->|Yes| Confirm["덮어쓸지\n확인"]
+        Parse --> Ask
+    end
+
+    Triage --> Explore
+
+    subgraph Explore["Step 1: 탐색 (병렬)"]
+        direction LR
+        A["🔍 컨텍스트\n워크플로, 우회 방법\n사용자 목소리"]
+        B["📦 솔루션\n키워드 + 큐레이션\n리스트 통합"]
+        C["👥 행동 패턴\n사람들이 실제로\n쓰는 것"]
+        D["🔀 JTBD\n다른 도메인의\n대안적 접근"]
+    end
+
+    Explore --> Gap["🧩 갭 분석\n중복 제거 + 모순 체크"]
+    Gap --> Save["💾 3개 파일 저장 (한글)"]
+    Save --> Summary["📋 요약 제시"]
+```
+
+## 출력 예시
+
+아래는 "게임 광고 사운드 자동 배치"를 스캔한 실제 결과입니다:
+
+<details>
+<summary><strong>triage.md</strong> — 문제 정의</summary>
+
+```markdown
+# 트리아지
+- 문제: 게임 광고 영상에 사운드를 자동 배치하는 도구.
+       AI가 영상을 분석해 구간별로 미리 지정된 효과음을 자동 삽입. After Effects 기준.
+- 대상: 게임 광고 영상 제작자 (모션 디자이너, 크리에이티브 프로듀서)
+- 이유: 타이틀별 사운드가 거의 고정인데 매번 수동 타이밍 조절하는 리소스가 큼. 반복 작업 제거 목적.
+```
+
+</details>
+
+<details>
+<summary><strong>context.md</strong> — 워크플로 & 사용자 목소리</summary>
+
+```markdown
+# 컨텍스트: 사운드 자동 배치
+
+## 워크플로 현황
+게임 스튜디오의 UA 광고 영상 제작 파이프라인에서 발생:
+1. 크리에이티브 팀이 광고 브리프 수령 (15~30초 영상)
+2. 모션 디자이너가 After Effects에서 게임플레이 푸티지/애니메이션 조립
+3. 타이틀별 고정 SFX 라이브러리에서 효과음을 수동으로 타임라인에 배치
+4. A/B 테스트용 변형 반복 — 매번 SFX 재배치 필요
+
+## 영향 대상
+| 역할 | 책임 | 기술 수준 |
+|------|------|----------|
+| 모션 디자이너 | AE에서 광고 영상 조립 + SFX 배치 직접 수행 | AE 중~고급, 오디오는 비전문 |
+| 영상 에디터 | 편집 + 기본 사운드 디자인 겸임 | 제너럴리스트, 고볼륨 처리 |
+
+## 현재 우회 방법
+1. 수동 타임라인 스크러빙 — 넘패드 * 키로 마커 찍기 → SFX 수동 배치
+2. MonkeySauce — 마커→SFX 할당 자동화 (단, 마커 자체는 수동)
+3. 템플릿 기반 프리리깅 — SFX 미리 포지션된 AE 프로젝트 템플릿
+
+## 사용자 목소리
+> "Sound is often left until the end of the process when sound is actually
+>  responsible for half OR MORE of the emotional impact of work."
+> — School of Motion
+```
+
+</details>
+
+<details open>
+<summary><strong>solutions.md</strong> — 솔루션 현황 (주요 섹션)</summary>
+
+```markdown
+# 솔루션 현황: 사운드 자동 배치
+
+## 솔루션 목록
+| 이름 | 접근 방식 | 강점 | 약점 |
+|------|----------|------|------|
+| MonkeySauce | AE 스크립트: 마커 기반 SFX 트리거 | AE 네이티브, 커스텀 SFX 가능 | 마커는 수동, 영상 분석 없음 |
+| ElevenLabs V2S | AI: GPT-4o 비전 → SFX 생성 | API 사용 가능 | 커스텀 라이브러리 미지원 |
+| MMAudio | 오픈소스: 비디오→오디오 합성 | 무료, 로컬 실행 | 개별 SFX 아닌 앰비언트 생성 |
+| CapCut Auto | 소비자 에디터: AI SFX 자동 배치 | 무료, 빠름 | 소비자급, 커스텀 SFX 불가 |
+| ... | (총 24개 솔루션) | | |
+
+## 카테고리 분류
+1. AE 네이티브 도구 (수동/반자동) — MonkeySauce, Boombox, SoundBox ...
+2. AI SFX 생성 (새 사운드 합성) — ElevenLabs, MMAudio, FoleyCrafter ...
+3. 소비자 자동 SFX 에디터 — CapCut, Submagic, FlexClip ...
+4. 게임 엔진 직접 캡처 — Unreal Take Recorder, UE4Capture
+
+## 핵심 공백
+3-레이어 문제를 해결하는 도구가 없음:
+| 레이어 | 필요 기능 | 현존 도구 |
+|--------|----------|----------|
+| 1. 이벤트 감지 | AI가 게임 이벤트 감지 | ElevenLabs (부분적) |
+| 2. SFX 매핑 | 이벤트→커스텀 SFX 선택 | MonkeySauce (수동) |
+| 3. AE 배치 | 정확한 프레임에 배치 | MonkeySauce, ExtendScript |
+
+## 모순점
+| 모순 | 마케팅 | 실제 |
+|------|--------|------|
+| AI SFX 도구 실용성 | "다수 존재" | 게임 광고 프로는 아무도 안 씀 |
+| MonkeySauce 충분성 | "24개 레시피로 자동화" | 감지 아닌 할당만 해결 |
+
+## 핵심 인사이트
+도구가 없어서가 아니라 도구들이 각각 다른 레이어만 해결하기 때문에 발생.
+AI 비전 기술은 이벤트를 감지할 수 있고, AE 스크립팅은 배치할 수 있다.
+그러나 이 둘을 연결하면서 커스텀 SFX 라이브러리를 매핑하는 통합 레이어가 없다.
+```
+
+</details>
+
+### 터미널 요약
+
+리서치가 완료되면 간략한 요약이 표시됩니다:
 
 ```
 ## Groundwork 완료: sound-auto-placement
@@ -52,29 +177,13 @@ mkdir -p ~/.claude/skills/groundwork && curl -sL https://raw.githubusercontent.c
 
 ### 솔루션 현황
 - 24개 솔루션, 7개 카테고리
-- 핵심 인사이트: 3-레이어 문제를 해결하는 도구 없음 (감지/매핑/배치)
+- 핵심 인사이트: 3-레이어 문제(감지/매핑/배치)를 해결하는 도구 없음
 - 핵심 공백: AI SFX 도구 다수 존재하나 커스텀 라이브러리 미지원이 치명적
-```
 
-## 작동 방식
-
-```
-Step 0: 트리아지
-  입력 파싱 → 문제 / 대상 / 이유
-  불명확하면 최대 2개 질문
-  기존 결과 있으면 덮어쓸지 확인
-
-Step 1: 탐색 (4개 에이전트 병렬)
-  A: 컨텍스트    — 워크플로, 우회 방법, 사용자 목소리
-  B: 솔루션      — 키워드 검색 + 큐레이션 리스트 (통합)
-  C: 행동 패턴   — 사람들이 실제로 쓰는 것 (커뮤니티 리서치)
-  D: JTBD        — 다른 도메인의 대안적 접근
-
-  → 오케스트레이터: 갭 분석 + 중복 제거 + 모순 체크
-
-Step 2: 저장 (기본 한글, 설정 가능)
-
-Step 3: 요약
+### 파일
+- .omc/groundwork/sound-auto-placement/triage.md
+- .omc/groundwork/sound-auto-placement/context.md
+- .omc/groundwork/sound-auto-placement/solutions.md
 ```
 
 ## 주요 기능

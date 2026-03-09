@@ -69,7 +69,7 @@ Launch ALL 4 agents simultaneously:
 
 ```
 Task(subagent_type="oh-my-claudecode:document-specialist", model="sonnet", prompt="
-[SCOUT:CONTEXT]
+[GROUNDWORK:CONTEXT]
 
 Research the following pain point. Search in ENGLISH for broader coverage.
 Return your analysis in ENGLISH (it will be translated when saved).
@@ -100,7 +100,7 @@ Format your response as markdown with these exact sections:
 
 ```
 Task(subagent_type="oh-my-claudecode:document-specialist", model="sonnet", prompt="
-[SCOUT:SOLUTIONS]
+[GROUNDWORK:SOLUTIONS]
 
 Find ALL existing solutions for this problem. Search in ENGLISH.
 Combine direct keyword search AND curated lists.
@@ -134,7 +134,7 @@ Format as markdown with:
 
 ```
 Task(subagent_type="oh-my-claudecode:document-specialist", model="sonnet", prompt="
-[SCOUT:BEHAVIOR]
+[GROUNDWORK:BEHAVIOR]
 
 Find how people ACTUALLY solve this problem in practice. Search in ENGLISH.
 
@@ -162,7 +162,7 @@ Format as markdown with:
 
 ```
 Task(subagent_type="oh-my-claudecode:document-specialist", model="sonnet", prompt="
-[SCOUT:JTBD]
+[GROUNDWORK:JTBD]
 
 Find alternative solutions from a Jobs-to-be-Done perspective. Search in ENGLISH.
 
