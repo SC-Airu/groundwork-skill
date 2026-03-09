@@ -24,7 +24,7 @@ Does NOT decide whether to build. Does NOT assess technical feasibility. Those a
 </Use_When>
 
 <Do_Not_Use_When>
-- You need a full discovery pipeline with tech assessment and strategy (use /discovery)
+- You need a full discovery pipeline with tech assessment and strategy
 - You already know what to build and need a plan (use /plan)
 - It's a bug fix or small change (just do it)
 </Do_Not_Use_When>
